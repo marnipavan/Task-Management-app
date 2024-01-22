@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Add New Task</h1>
+
+<form action="/save" method="post" th:object="${task}">
+    <p>
+        <label>Task Name: <input type="text" th:field="*{taskName}"></label>
+        <span th:if="${#fields.hasErrors('taskName')}" th:errors="*{taskName}"></span>
+    </p>
+    <p>
+        <label>Description: <input type="text" th:field="*{description}"></label>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </p>
+    <p>
+        <label>Due Date: <input type="text" th:field="*{dueDate}" placeholder="yyyy-MM-dd"></label>
+        <span th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}"></span>
+    </p>
+    <input type="submit" value="Save">
+</form>
+
+<a th:href="@{/list}">Tasks - Home</a>
+</body>
+</html>
